@@ -1,0 +1,87 @@
+:root {
+  font-size: 16px;
+  --bg: #f4f6fa;
+  --panel: #ffffff;
+  --text: #1b2430;
+  --muted: #55606e;
+  --primary: #1456c8;
+  --primary-dark: #0e3f94;
+  --danger: #b3261e;
+  --danger-bg: #fdecea;
+  --border: #d5dbe5;
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  font-family: system-ui, sans-serif;
+  background: var(--bg);
+  color: var(--text);
+}
+
+.app { max-width: 1200px; margin: 0 auto; padding: 16px; }
+h1 { margin: 8px 0 16px; }
+h2 { margin: 0 0 12px; font-size: 1.2rem; }
+
+.layout { display: grid; grid-template-columns: 1fr; gap: 16px; }
+.column { display: flex; flex-direction: column; gap: 16px; min-width: 0; }
+@media (min-width: 960px) {
+  .layout { grid-template-columns: minmax(0, 5fr) minmax(0, 6fr); align-items: start; }
+}
+
+.panel { background: var(--panel); border: 1px solid var(--border); border-radius: 8px; padding: 16px; }
+.panel-head { display: flex; justify-content: space-between; align-items: center; gap: 8px; flex-wrap: wrap; }
+.panel-head h2 { margin: 0; }
+
+.badge { background: #fff4d6; color: #5c4400; padding: 8px 12px; border-radius: 6px; margin: 0 0 12px; font-size: 0.9rem; }
+
+table { width: 100%; border-collapse: collapse; }
+th, td { text-align: left; padding: 8px; border-bottom: 1px solid var(--border); overflow-wrap: anywhere; }
+.num { text-align: right; white-space: nowrap; }
+th[scope='col'] { white-space: nowrap; }
+
+.skeleton { height: 28px; margin-bottom: 8px; border-radius: 4px; background: linear-gradient(90deg, #e6eaf1, #f3f5f9, #e6eaf1); background-size: 200% 100%; animation: shimmer 1.2s infinite; }
+@keyframes shimmer { to { background-position: -200% 0; } }
+@media (prefers-reduced-motion: reduce) { .skeleton { animation: none; } }
+
+.field { margin-bottom: 8px; }
+label { display: block; font-weight: 600; margin-bottom: 4px; }
+input, select { width: 100%; font: inherit; padding: 10px; border: 1px solid #8893a3; border-radius: 6px; background: #fff; color: var(--text); }
+input::placeholder { color: #6b7686; opacity: 1; }
+input[aria-invalid='true'], select[aria-invalid='true'] { border-color: var(--danger); }
+:focus-visible { outline: 3px solid var(--primary); outline-offset: 2px; }
+.field-error { color: var(--danger); font-size: 0.875rem; min-height: 1.25rem; margin: 4px 0 0; }
+
+.estimate { background: #eef3fc; border-radius: 6px; padding: 12px; margin: 8px 0 16px; }
+.estimate p { margin: 4px 0; }
+.estimate .total { font-weight: 700; font-size: 1.1rem; }
+.estimate .hint { color: var(--muted); font-size: 0.875rem; }
+
+.btn { font: inherit; font-weight: 600; padding: 10px 18px; border: 0; border-radius: 6px; background: var(--primary); color: #fff; cursor: pointer; }
+.btn:hover:not(:disabled) { background: var(--primary-dark); }
+.btn:disabled { background: #8d97a6; cursor: not-allowed; }
+.btn-secondary { background: #fff; color: var(--primary); border: 1px solid var(--primary); }
+.btn-secondary:hover:not(:disabled) { background: #eef3fc; }
+
+.banner, .form-error { background: var(--danger-bg); color: var(--danger); padding: 10px 12px; border-radius: 6px; display: flex; justify-content: space-between; align-items: center; gap: 8px; }
+.form-error { display: block; margin: 0 0 12px; }
+
+.confirmation { border-color: #1e7b3a; }
+.reference { font-size: 1.1rem; }
+dl { display: grid; grid-template-columns: auto 1fr; gap: 6px 16px; margin: 12px 0 16px; }
+dt { color: var(--muted); }
+dd { margin: 0; overflow-wrap: anywhere; }
+h2:focus { outline: none; }
+
+.filter { display: flex; align-items: center; gap: 8px; margin: 0; font-weight: 400; }
+.filter select { width: auto; padding: 6px; }
+
+/* History: table on desktop, stacked cards on mobile. */
+@media (max-width: 767px) {
+  table.history, table.history tbody { display: block; }
+  table.history thead { position: absolute; left: -9999px; }
+  table.history tr { display: block; border: 1px solid var(--border); border-radius: 6px; margin-bottom: 8px; padding: 4px 0; }
+  table.history th, table.history td { display: flex; justify-content: space-between; gap: 12px; border: 0; text-align: right; padding: 4px 10px; }
+  table.history [data-label]::before { content: attr(data-label); color: var(--muted); font-weight: 600; text-align: left; }
+}
