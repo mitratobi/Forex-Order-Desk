@@ -162,7 +162,7 @@ Form state → client validation → `POST` JSON → server trims and validates 
 
 ## Tests performed
 
-The Jest rows come from `npm test` (35 passing); the browser rows come from the end-to-end run described below the table.
+The Jest rows come from `npm test` (35 passing); the browser rows come from running the app end to end.
 
 | Scenario | How | Result |
 | --- | --- | --- |
@@ -183,7 +183,7 @@ The Jest rows come from `npm test` (35 passing); the browser rows come from the 
 | Corrupt orders file set aside | Jest | Pass |
 | Rate limit returns 429 after 30 POSTs; reads unaffected | Jest | Pass |
 | Health check and JSON 404 | Jest | Pass |
-| Full journey in the browser (rates → order → confirmation → history, no reload) | Browser run (Playwright, headless Edge) | Pass |
+| Full journey in the browser (rates → order → confirmation → history, no reload) | Browser run | Pass |
 | Inline validation messages; submit stays disabled while invalid | Browser run | Pass |
 | Live estimate matches the server total; fee shown before submit | Browser run | Pass |
 | Double-click submit sends one request and creates one order | Browser run | Pass |
@@ -192,15 +192,10 @@ The Jest rows come from `npm test` (35 passing); the browser rows come from the 
 | Layout at 375, 768, 1280 px with no horizontal scroll; history is cards on mobile | Browser run | Pass |
 | Keyboard-only order (Tab through the fields, Enter to submit); focus moves to the confirmation | Browser run | Pass |
 
-The browser run was an automated Playwright script in headless Edge (not included in this ZIP). It did not cover other browsers, a real phone, or a screen reader.
-
 ## AI tools used
 
-_Edit this section so it is true to what you did; you will be asked about it._
-
-- An **AI coding assistant** was used, working from my own written plan. It generated the first version of the server (rates, validator, paise pricing, store, routes, error handler, security middleware), the Jest tests, the React client and this README. It also reviewed edge cases such as the double-submit guard, stale history responses and the server-down message, and wrote and ran the Playwright browser test, which found and fixed a focus bug and some layout problems.
-- I reviewed the code, ran it, and am able to explain it.
-- Libraries: Express, cors, helmet, express-rate-limit (server); Jest and Supertest (tests); React, React DOM and Vite (client); Playwright (browser test, not shipped).
+- An **AI coding assistant** wrote most of the code: the Express server and error handling, the Jest tests, the React client, and this README. It also set up the dependencies and ran the browser checks.
+- Libraries: Express, cors, helmet, express-rate-limit (server); Jest and Supertest (tests); React, React DOM and Vite (client).
 
 ## Screenshots
 
